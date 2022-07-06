@@ -1,6 +1,8 @@
 const express = require('express')
 const expressHandlebars = require('express-handlebars')
 const app = express()
+// including the created module in lib folder
+const fortune = require('./lib/fortune')
 
 //configure Handlebars view engine
 app.engine('handlebars', expressHandlebars.engine({
@@ -42,9 +44,12 @@ app.get('/', (req,res)=> res.render('home'))
 // New about page
 app.get('/about', (req,res)=> {
     
-    // Modification to add fortune
+    /* Modification to add fortune
     const randomFortune = fortunes[Math.floor(Math.random()*fortunes.length)]
-    res.render('about', { fortune: randomFortune })
+    res.render('about', { fortune: randomFortune }) */
+
+    // Modification to include created module
+    res.render('about', {fortune: fortune.getFortune()})
 })
 
 // custom 404 page 
